@@ -1,137 +1,147 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-15T15:50:38+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">jOOQ Configeration</title><link href="http://localhost:4000/jooq-pom-config.html" rel="alternate" type="text/html" title="jOOQ Configeration" /><published>2018-07-15T14:08:44+08:00</published><updated>2018-07-15T14:08:44+08:00</updated><id>http://localhost:4000/jooq-pom-config</id><content type="html" xml:base="http://localhost:4000/jooq-pom-config.html">```XML
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-15T16:33:58+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">jOOQ Configeration</title><link href="http://localhost:4000/jooq-pom-config.html" rel="alternate" type="text/html" title="jOOQ Configeration" /><published>2018-07-15T14:08:44+08:00</published><updated>2018-07-15T14:08:44+08:00</updated><id>http://localhost:4000/jooq-pom-config</id><content type="html" xml:base="http://localhost:4000/jooq-pom-config.html">&lt;pre&gt;&lt;code class=&quot;language-XML&quot;&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
+&amp;lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&amp;gt;
+	&amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
 
-	&lt;groupId&gt;com.xieyonghui&lt;/groupId&gt;
-	&lt;artifactId&gt;demo&lt;/artifactId&gt;
-	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-	&lt;packaging&gt;jar&lt;/packaging&gt;
+	&amp;lt;groupId&amp;gt;com.xieyonghui&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;demo&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt;
+	&amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;
 
-	&lt;name&gt;cs&lt;/name&gt;
-	&lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+	&amp;lt;name&amp;gt;cs&amp;lt;/name&amp;gt;
+	&amp;lt;description&amp;gt;Demo project for Spring Boot&amp;lt;/description&amp;gt;
 
-	&lt;parent&gt;
-		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
-		&lt;version&gt;2.0.3.RELEASE&lt;/version&gt;
-		&lt;relativePath /&gt; &lt;!-- lookup parent from repository --&gt;
-	&lt;/parent&gt;
+	&amp;lt;parent&amp;gt;
+		&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+		&amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt;
+		&amp;lt;version&amp;gt;2.0.3.RELEASE&amp;lt;/version&amp;gt;
+		&amp;lt;relativePath /&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt;
+	&amp;lt;/parent&amp;gt;
 
-	&lt;properties&gt;
-		&lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
-		&lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
-		&lt;java.version&gt;1.8&lt;/java.version&gt;
-	&lt;/properties&gt;
+	&amp;lt;properties&amp;gt;
+		&amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt;
+		&amp;lt;project.reporting.outputEncoding&amp;gt;UTF-8&amp;lt;/project.reporting.outputEncoding&amp;gt;
+		&amp;lt;java.version&amp;gt;1.8&amp;lt;/java.version&amp;gt;
+	&amp;lt;/properties&amp;gt;
 
-	&lt;dependencies&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.jooq&lt;/groupId&gt;
-			&lt;artifactId&gt;jooq&lt;/artifactId&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.jooq&lt;/groupId&gt;
-			&lt;artifactId&gt;jooq-meta&lt;/artifactId&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.jooq&lt;/groupId&gt;
-			&lt;artifactId&gt;jooq-codegen&lt;/artifactId&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;mysql&lt;/groupId&gt;
-			&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-			&lt;version&gt;8.0.11&lt;/version&gt;
-		&lt;/dependency&gt;
-		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
-			&lt;scope&gt;test&lt;/scope&gt;
-		&lt;/dependency&gt;
-	&lt;/dependencies&gt;
+	&amp;lt;dependencies&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;spring-boot-starter-jdbc&amp;lt;/artifactId&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;spring-boot-starter-thymeleaf&amp;lt;/artifactId&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;spring-boot-starter-web&amp;lt;/artifactId&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.jooq&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;jooq&amp;lt;/artifactId&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.jooq&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;jooq-meta&amp;lt;/artifactId&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.jooq&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;jooq-codegen&amp;lt;/artifactId&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;
+			&amp;lt;version&amp;gt;8.0.11&amp;lt;/version&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+		&amp;lt;dependency&amp;gt;
+			&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+			&amp;lt;artifactId&amp;gt;spring-boot-starter-test&amp;lt;/artifactId&amp;gt;
+			&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+		&amp;lt;/dependency&amp;gt;
+	&amp;lt;/dependencies&amp;gt;
 
-	&lt;build&gt;
-		&lt;plugins&gt;
-			&lt;plugin&gt;
-				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
-				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
-			&lt;/plugin&gt;
-			&lt;plugin&gt;
-				&lt;groupId&gt;org.jooq&lt;/groupId&gt;
-				&lt;artifactId&gt;jooq-codegen-maven&lt;/artifactId&gt;
-				&lt;executions&gt;
-			        &lt;execution&gt;
-			            &lt;phase&gt;generate-sources&lt;/phase&gt;
-			            &lt;goals&gt;
-			                &lt;goal&gt;generate&lt;/goal&gt;
-			            &lt;/goals&gt;
-			        &lt;/execution&gt;
-			    &lt;/executions&gt;
-				&lt;dependencies&gt;
-					&lt;dependency&gt;
-						&lt;groupId&gt;mysql&lt;/groupId&gt;
-						&lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-						&lt;version&gt;8.0.11&lt;/version&gt;
-					&lt;/dependency&gt;
-				&lt;/dependencies&gt;
-				&lt;configuration&gt;
-					&lt;jdbc&gt;
-						&lt;driver&gt;com.mysql.cj.jdbc.Driver&lt;/driver&gt;
-						&lt;url&gt;&lt;![CDATA[jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&amp;serverTimezone=UTC&amp;characterEncoding=UTF-8&amp;useSSL=false]]&gt;&lt;/url&gt;
-						&lt;user&gt;root&lt;/user&gt;
-						&lt;password&gt;123456&lt;/password&gt;
-					&lt;/jdbc&gt;
-					&lt;generator&gt;
-			            &lt;database&gt;
-			            	&lt;name&gt;org.jooq.util.mysql.MySQLDatabase&lt;/name&gt;
-			                &lt;includes&gt;.*&lt;/includes&gt;
-			                &lt;inputSchema&gt;cs&lt;/inputSchema&gt;
-			                &lt;overridePrimaryKeys&gt;id&lt;/overridePrimaryKeys&gt;
-			                &lt;properties&gt;
-						        &lt;property&gt;
-						          &lt;key&gt;dialect&lt;/key&gt;
-						          &lt;value&gt;MYSQL&lt;/value&gt;
-						        &lt;/property&gt;
-						      &lt;/properties&gt;
-			            &lt;/database&gt;
-			            &lt;target&gt;
-			                &lt;packageName&gt;com.xieyonghui.demo.dto.jooq&lt;/packageName&gt;
-			                &lt;directory&gt;/src/main/java&lt;/directory&gt;
-			            &lt;/target&gt;
-			        &lt;/generator&gt;
-				&lt;/configuration&gt;
-			&lt;/plugin&gt;
-		&lt;/plugins&gt;
-	&lt;/build&gt;
-&lt;/project&gt;
-```</content><author><name></name></author><summary type="html">```XML 4.0.0</summary></entry><entry><title type="html">Welcome to Xie Yonghui Blog!</title><link href="http://localhost:4000/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Xie Yonghui Blog!" /><published>2018-07-15T12:36:44+08:00</published><updated>2018-07-15T12:36:44+08:00</updated><id>http://localhost:4000/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/welcome-to-jekyll.html">You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+	&amp;lt;build&amp;gt;
+		&amp;lt;plugins&amp;gt;
+			&amp;lt;plugin&amp;gt;
+				&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;
+				&amp;lt;artifactId&amp;gt;spring-boot-maven-plugin&amp;lt;/artifactId&amp;gt;
+			&amp;lt;/plugin&amp;gt;
+			&amp;lt;plugin&amp;gt;
+				&amp;lt;groupId&amp;gt;org.jooq&amp;lt;/groupId&amp;gt;
+				&amp;lt;artifactId&amp;gt;jooq-codegen-maven&amp;lt;/artifactId&amp;gt;
+				&amp;lt;executions&amp;gt;
+			        &amp;lt;execution&amp;gt;
+			            &amp;lt;phase&amp;gt;generate-sources&amp;lt;/phase&amp;gt;
+			            &amp;lt;goals&amp;gt;
+			                &amp;lt;goal&amp;gt;generate&amp;lt;/goal&amp;gt;
+			            &amp;lt;/goals&amp;gt;
+			        &amp;lt;/execution&amp;gt;
+			    &amp;lt;/executions&amp;gt;
+				&amp;lt;dependencies&amp;gt;
+					&amp;lt;dependency&amp;gt;
+						&amp;lt;groupId&amp;gt;mysql&amp;lt;/groupId&amp;gt;
+						&amp;lt;artifactId&amp;gt;mysql-connector-java&amp;lt;/artifactId&amp;gt;
+						&amp;lt;version&amp;gt;8.0.11&amp;lt;/version&amp;gt;
+					&amp;lt;/dependency&amp;gt;
+				&amp;lt;/dependencies&amp;gt;
+				&amp;lt;configuration&amp;gt;
+					&amp;lt;jdbc&amp;gt;
+						&amp;lt;driver&amp;gt;com.mysql.cj.jdbc.Driver&amp;lt;/driver&amp;gt;
+						&amp;lt;url&amp;gt;&amp;lt;![CDATA[jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&amp;amp;serverTimezone=UTC&amp;amp;characterEncoding=UTF-8&amp;amp;useSSL=false]]&amp;gt;&amp;lt;/url&amp;gt;
+						&amp;lt;user&amp;gt;root&amp;lt;/user&amp;gt;
+						&amp;lt;password&amp;gt;123456&amp;lt;/password&amp;gt;
+					&amp;lt;/jdbc&amp;gt;
+					&amp;lt;generator&amp;gt;
+			            &amp;lt;database&amp;gt;
+			            	&amp;lt;name&amp;gt;org.jooq.util.mysql.MySQLDatabase&amp;lt;/name&amp;gt;
+			                &amp;lt;includes&amp;gt;.*&amp;lt;/includes&amp;gt;
+			                &amp;lt;inputSchema&amp;gt;cs&amp;lt;/inputSchema&amp;gt;
+			                &amp;lt;overridePrimaryKeys&amp;gt;id&amp;lt;/overridePrimaryKeys&amp;gt;
+			                &amp;lt;properties&amp;gt;
+						        &amp;lt;property&amp;gt;
+						          &amp;lt;key&amp;gt;dialect&amp;lt;/key&amp;gt;
+						          &amp;lt;value&amp;gt;MYSQL&amp;lt;/value&amp;gt;
+						        &amp;lt;/property&amp;gt;
+						      &amp;lt;/properties&amp;gt;
+			            &amp;lt;/database&amp;gt;
+			            &amp;lt;target&amp;gt;
+			                &amp;lt;packageName&amp;gt;com.xieyonghui.demo.dto.jooq&amp;lt;/packageName&amp;gt;
+			                &amp;lt;directory&amp;gt;/src/main/java&amp;lt;/directory&amp;gt;
+			            &amp;lt;/target&amp;gt;
+			        &amp;lt;/generator&amp;gt;
+				&amp;lt;/configuration&amp;gt;
+			&amp;lt;/plugin&amp;gt;
+		&amp;lt;/plugins&amp;gt;
+	&amp;lt;/build&amp;gt;
+&amp;lt;/project&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```XML 4.0.0</summary></entry><entry><title type="html">jOOQ java fragment</title><link href="http://localhost:4000/jooq-java-code.html" rel="alternate" type="text/html" title="jOOQ java fragment" /><published>2018-07-15T14:08:44+08:00</published><updated>2018-07-15T14:08:44+08:00</updated><id>http://localhost:4000/jooq-java-code</id><content type="html" xml:base="http://localhost:4000/jooq-java-code.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;@Component
+public class ArticleDao  {
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+	private final DSLContext dc;
 
-Jekyll also offers powerful support for code snippets:
+	private final Article art = Article.ARTICLE;
 
-{% highlight ruby %}
-def print_hi(name)
-  puts &quot;Hi, #{name}&quot;
-end
-print_hi('Tom')
-#=&gt; prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+	public ArticleDao(DSLContext dslContext) {
+		dc = dslContext;
+	}
+	
+	public List&amp;lt;Article&amp;gt; select(String auth){
+		return dc.select(art.ID,art.CONTENT).from(art).where(art.AUTH.eq(auth)).fetch().into(Article.class);
+	}
+	
+}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```Java @Component public class ArticleDao {</summary></entry><entry><title type="html">Welcome to Xie Yonghui Blog!</title><link href="http://localhost:4000/welcome-to-jekyll.html" rel="alternate" type="text/html" title="Welcome to Xie Yonghui Blog!" /><published>2018-07-15T12:36:44+08:00</published><updated>2018-07-15T12:36:44+08:00</updated><id>http://localhost:4000/welcome-to-jekyll</id><content type="html" xml:base="http://localhost:4000/welcome-to-jekyll.html">&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;https://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;</content><author><name></name></author><summary type="html">You’ll find this post in your _posts directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run jekyll serve, which launches a web server and auto-regenerates your site when a file is updated.</summary></entry></feed>
