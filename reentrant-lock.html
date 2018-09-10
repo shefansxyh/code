@@ -3,17 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
-<title>code example By cs.xieyonghui.com | code example By cs.xieyonghui.com</title>
+<title>ReentrantLock Demo | code example By cs.xieyonghui.com</title>
 <meta name="generator" content="Jekyll v3.8.3" />
-<meta property="og:title" content="code example By cs.xieyonghui.com" />
+<meta property="og:title" content="ReentrantLock Demo" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="code example By cs.xieyonghui.com" />
-<meta property="og:description" content="code example By cs.xieyonghui.com" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<meta name="description" content="```Java import java.util.concurrent.TimeUnit; import java.util.concurrent.locks.ReentrantLock;" />
+<meta property="og:description" content="```Java import java.util.concurrent.TimeUnit; import java.util.concurrent.locks.ReentrantLock;" />
+<link rel="canonical" href="http://localhost:4000/reentrant-lock.html" />
+<meta property="og:url" content="http://localhost:4000/reentrant-lock.html" />
 <meta property="og:site_name" content="code example By cs.xieyonghui.com" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-09-10T18:35:00+08:00" />
 <script type="application/ld+json">
-{"name":"code example By cs.xieyonghui.com","description":"code example By cs.xieyonghui.com","@type":"WebSite","url":"http://localhost:4000/","headline":"code example By cs.xieyonghui.com","@context":"http://schema.org"}</script>
+{"description":"```Java import java.util.concurrent.TimeUnit; import java.util.concurrent.locks.ReentrantLock;","@type":"BlogPosting","url":"http://localhost:4000/reentrant-lock.html","headline":"ReentrantLock Demo","dateModified":"2018-09-10T18:35:00+08:00","datePublished":"2018-09-10T18:35:00+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/reentrant-lock.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="code example By cs.xieyonghui.com" /></head>
 <body><header class="site-header" role="banner">
@@ -33,41 +35,58 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
-<h2 class="post-list-heading">Posts</h2>
-    <ul class="post-list"><li><span class="post-meta">Sep 10, 2018</span>
-        <h3>
-          <a class="post-link" href="/reentrant-lock.html">
-            ReentrantLock Demo
-          </a>
-        </h3></li><li><span class="post-meta">Sep 10, 2018</span>
-        <h3>
-          <a class="post-link" href="/reentrant-lock-condition.html">
-            ReentrantLock Condition Demo
-          </a>
-        </h3></li><li><span class="post-meta">Jul 29, 2018</span>
-        <h3>
-          <a class="post-link" href="/javascript.html">
-            JavaScript Inheritance Prototype
-          </a>
-        </h3></li><li><span class="post-meta">Jul 15, 2018</span>
-        <h3>
-          <a class="post-link" href="/jooq-pom-config.html">
-            jOOQ Configeration
-          </a>
-        </h3></li><li><span class="post-meta">Jul 15, 2018</span>
-        <h3>
-          <a class="post-link" href="/jooq-java-code.html">
-            jOOQ java fragment
-          </a>
-        </h3></li><li><span class="post-meta">Jul 15, 2018</span>
-        <h3>
-          <a class="post-link" href="/welcome-to-jekyll.html">
-            Welcome to Xie Yonghui Blog!
-          </a>
-        </h3></li></ul>
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p></div>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">ReentrantLock Demo</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-09-10T18:35:00+08:00" itemprop="datePublished">Sep 10, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <pre><code class="language-Java">import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class RL {
+
+	public static void main(String[] args) throws InterruptedException {
+		ReentrantLock lock = new ReentrantLock();
+		System.out.println("1:"+lock.getHoldCount()+"-&gt;1-1:"+lock.isHeldByCurrentThread());//1:0-&gt;1-1:false
+		lock.lock();
+		
+		//other thread
+		new Thread(()-&gt;{
+			//try lock
+			System.out.println("other thread tryLock:"+lock.tryLock());//other thread tryLock:false
+			try {
+				System.out.println("other thread tryLock wait:"+lock.tryLock(1000,TimeUnit.SECONDS));//other thread tryLock wait:true
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}).start();
+		
+		//wait for other thread
+		Object o = new Object();
+		synchronized (o) {
+			o.wait(10000);
+		}
+		
+		System.out.println("2:"+lock.getHoldCount()+"-&gt;2-1:"+lock.isHeldByCurrentThread());//2:1-&gt;2-1:true
+		lock.lock();
+		System.out.println("3:"+lock.getHoldCount());//3:2
+		lock.unlock();
+		System.err.println("4:"+lock.getHoldCount());//4:1
+		lock.unlock();
+		System.err.println("5:"+lock.getHoldCount());//5:0
+		
+	}
+
+}
+</code></pre>
+
+  </div><a class="u-url" href="/reentrant-lock.html" hidden></a>
+</article>
 
       </div>
     </main><footer class="site-footer h-card">

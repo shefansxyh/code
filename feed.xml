@@ -1,4 +1,80 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-07-29T20:43:20+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">JavaScript Inheritance Prototype</title><link href="http://localhost:4000/javascript.html" rel="alternate" type="text/html" title="JavaScript Inheritance Prototype" /><published>2018-07-29T20:35:00+08:00</published><updated>2018-07-29T20:35:00+08:00</updated><id>http://localhost:4000/javascript</id><content type="html" xml:base="http://localhost:4000/javascript.html">&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-10T19:25:43+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">ReentrantLock Demo</title><link href="http://localhost:4000/reentrant-lock.html" rel="alternate" type="text/html" title="ReentrantLock Demo" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/reentrant-lock</id><content type="html" xml:base="http://localhost:4000/reentrant-lock.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class RL {
+
+	public static void main(String[] args) throws InterruptedException {
+		ReentrantLock lock = new ReentrantLock();
+		System.out.println(&quot;1:&quot;+lock.getHoldCount()+&quot;-&amp;gt;1-1:&quot;+lock.isHeldByCurrentThread());//1:0-&amp;gt;1-1:false
+		lock.lock();
+		
+		//other thread
+		new Thread(()-&amp;gt;{
+			//try lock
+			System.out.println(&quot;other thread tryLock:&quot;+lock.tryLock());//other thread tryLock:false
+			try {
+				System.out.println(&quot;other thread tryLock wait:&quot;+lock.tryLock(1000,TimeUnit.SECONDS));//other thread tryLock wait:true
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}).start();
+		
+		//wait for other thread
+		Object o = new Object();
+		synchronized (o) {
+			o.wait(10000);
+		}
+		
+		System.out.println(&quot;2:&quot;+lock.getHoldCount()+&quot;-&amp;gt;2-1:&quot;+lock.isHeldByCurrentThread());//2:1-&amp;gt;2-1:true
+		lock.lock();
+		System.out.println(&quot;3:&quot;+lock.getHoldCount());//3:2
+		lock.unlock();
+		System.err.println(&quot;4:&quot;+lock.getHoldCount());//4:1
+		lock.unlock();
+		System.err.println(&quot;5:&quot;+lock.getHoldCount());//5:0
+		
+	}
+
+}
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```Java import java.util.concurrent.TimeUnit; import java.util.concurrent.locks.ReentrantLock;</summary></entry><entry><title type="html">ReentrantLock Condition Demo</title><link href="http://localhost:4000/reentrant-lock-condition.html" rel="alternate" type="text/html" title="ReentrantLock Condition Demo" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/reentrant-lock-condition</id><content type="html" xml:base="http://localhost:4000/reentrant-lock-condition.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;iimport java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
+
+public class RLCondition {
+	
+	public static void main(String ... strings) throws InterruptedException {
+		ReentrantLock lock = new ReentrantLock();
+		Condition a = lock.newCondition();
+		Condition b = lock.newCondition();
+		
+		new Thread(()-&amp;gt;{
+			lock.lock();
+			a.signal();
+			lock.unlock();
+			
+			lock.lock();
+			try {
+				b.await();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			lock.unlock();
+			System.out.println(&quot;other pass&quot;);
+			
+		}).start();
+		
+		lock.lock();
+		a.await();
+		lock.unlock();
+		
+		lock.lock();
+		b.signal();
+		lock.unlock();
+		
+		System.out.println(&quot;pass&quot;);
+	}
+
+}
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```Java iimport java.util.concurrent.locks.Condition; import java.util.concurrent.locks.ReentrantLock;</summary></entry><entry><title type="html">JavaScript Inheritance Prototype</title><link href="http://localhost:4000/javascript.html" rel="alternate" type="text/html" title="JavaScript Inheritance Prototype" /><published>2018-07-29T20:35:00+08:00</published><updated>2018-07-29T20:35:00+08:00</updated><id>http://localhost:4000/javascript</id><content type="html" xml:base="http://localhost:4000/javascript.html">&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;Function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;prototype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;k&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;v&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
