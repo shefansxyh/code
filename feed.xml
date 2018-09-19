@@ -1,4 +1,71 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-10T19:25:43+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">ReentrantLock Demo</title><link href="http://localhost:4000/reentrant-lock.html" rel="alternate" type="text/html" title="ReentrantLock Demo" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/reentrant-lock</id><content type="html" xml:base="http://localhost:4000/reentrant-lock.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;import java.util.concurrent.TimeUnit;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-19T12:38:08+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">Thread,Executors,ForkJoinPool,Actor Example</title><link href="http://localhost:4000/thread-executors-forkjoinpool-actor.html" rel="alternate" type="text/html" title="Thread,Executors,ForkJoinPool,Actor Example" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/thread-executors-forkjoinpool-actor</id><content type="html" xml:base="http://localhost:4000/thread-executors-forkjoinpool-actor.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.RecursiveAction;
+
+public class ForkJoinConcurrent {
+
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		ForkJoinPool fjp = new ForkJoinPool();
+		List uid = new ArrayList();
+		for(int i = 1;i&amp;lt; 1001;i++) {
+			uid.add(&quot;user id:&quot;+i);
+		}
+		System.out.println(uid.size());
+		fjp.submit(new TaskUnit(0,1000,(st,et)-&amp;gt;{
+			
+			System.out.println(st+&quot;:&quot;+et);
+			
+			List suid = uid.subList(st,et);
+			//service.find(suid);
+			
+		})).get();
+		
+		
+	}
+	
+	static class TaskUnit extends  RecursiveAction{
+		
+		private final int unit = 10;
+		
+		private int st;
+		
+		private int et;
+		
+		private Callback c;
+		
+		public TaskUnit(int st,int et,Callback c) {
+			this.st = st;
+			this.et = et;
+			this.c = c;
+		}
+
+		@Override
+		protected void compute() {
+			if(et - st &amp;lt; unit){
+				c.call(st, et);
+			}else {
+				int middle =(st+et)/2;
+				TaskUnit l = new TaskUnit(st, middle,c);
+				TaskUnit r = new TaskUnit(middle, et,c);
+	            l.fork();
+	            r.fork();
+	        	l.join();
+	    		r.join();
+			}
+		}
+		
+	}
+	
+	static interface Callback {
+		
+		public void call(int st,int et);
+		
+	}
+
+}
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```Java import java.util.ArrayList; import java.util.List; import java.util.concurrent.ExecutionException; import java.util.concurrent.ForkJoinPool; import java.util.concurrent.RecursiveAction;</summary></entry><entry><title type="html">ReentrantLock Demo</title><link href="http://localhost:4000/reentrant-lock.html" rel="alternate" type="text/html" title="ReentrantLock Demo" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/reentrant-lock</id><content type="html" xml:base="http://localhost:4000/reentrant-lock.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class RL {
