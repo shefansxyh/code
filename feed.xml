@@ -1,4 +1,126 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-09-19T12:38:08+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">Thread,Executors,ForkJoinPool,Actor Example</title><link href="http://localhost:4000/thread-executors-forkjoinpool-actor.html" rel="alternate" type="text/html" title="Thread,Executors,ForkJoinPool,Actor Example" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/thread-executors-forkjoinpool-actor</id><content type="html" xml:base="http://localhost:4000/thread-executors-forkjoinpool-actor.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;import java.util.ArrayList;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-09T16:57:13+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">Java I/O multiplexing</title><link href="http://localhost:4000/java-io-multiplexing.html" rel="alternate" type="text/html" title="Java I/O multiplexing" /><published>2018-10-09T16:56:00+08:00</published><updated>2018-10-09T16:56:00+08:00</updated><id>http://localhost:4000/java-io-multiplexing</id><content type="html" xml:base="http://localhost:4000/java-io-multiplexing.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;package com.xieyonghui.art;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.util.Iterator;
+import java.util.Set;
+
+class Reactor implements Runnable {
+
+  static int MAXIN = 1024;
+  static int MAXOUT = 1024;
+
+  final Selector selector;
+  final ServerSocketChannel serverSocket;
+
+  Reactor(int port) throws IOException {
+    selector = Selector.open();
+    serverSocket = ServerSocketChannel.open();
+    serverSocket.socket().bind(new InetSocketAddress(port));
+    serverSocket.configureBlocking(false);
+    SelectionKey sk = serverSocket.register(selector, SelectionKey.OP_ACCEPT);
+    sk.attach(new Acceptor());
+  }
+
+
+  public void run() { // normally in a new
+
+    try {
+      while (!Thread.interrupted()) {
+        selector.select();
+        Set selected = selector.selectedKeys();
+        Iterator it = selected.iterator();
+        while (it.hasNext())
+          dispatch((SelectionKey) (it.next()));
+        selected.clear();
+      }
+    } catch (IOException ex) {
+      ex.printStackTrace();
+    }
+  }
+
+
+  void dispatch(SelectionKey k) {
+    Runnable r = (Runnable) (k.attachment());
+    if (r != null)
+      r.run();
+  }
+
+  class Acceptor implements Runnable { // inner
+    public void run() {
+      try {
+        SocketChannel c = serverSocket.accept();
+        if (c != null)
+          new Handler(selector, c);
+      } catch (IOException ex) {
+        ex.printStackTrace();
+      }
+    }
+  }
+
+  final class Handler implements Runnable {
+    final SocketChannel socket;
+    final SelectionKey sk;
+    ByteBuffer input = ByteBuffer.allocate(MAXIN);
+    ByteBuffer output = ByteBuffer.allocate(MAXOUT);
+    static final int READING = 0, SENDING = 1;
+    int state = READING;
+
+    Handler(Selector sel, SocketChannel c) throws IOException {
+      socket = c;
+      c.configureBlocking(false);
+      // Optionally try first read now
+      sk = socket.register(sel, 0);
+      sk.attach(this);
+      sk.interestOps(SelectionKey.OP_READ);
+      sel.wakeup();
+    }
+
+    boolean inputIsComplete() {
+
+      return false;
+    }
+
+    boolean outputIsComplete() {
+      return false;
+    }
+
+    void process() {}
+
+    public void run() {
+      try {
+        if (state == READING)
+          read();
+        else if (state == SENDING)
+          send();
+      } catch (IOException ex) {
+        /* ... */ }
+    }
+
+    void read() throws IOException {
+      socket.read(input);
+      if (inputIsComplete()) {
+        process();
+        state = SENDING;
+        // Normally also do first write now
+        sk.interestOps(SelectionKey.OP_WRITE);
+      }
+    }
+
+    void send() throws IOException {
+      socket.write(output);
+      if (outputIsComplete())
+        sk.cancel();
+    }
+  }
+
+}
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```Java package com.xieyonghui.art;</summary></entry><entry><title type="html">Thread,Executors,ForkJoinPool,Actor Example</title><link href="http://localhost:4000/thread-executors-forkjoinpool-actor.html" rel="alternate" type="text/html" title="Thread,Executors,ForkJoinPool,Actor Example" /><published>2018-09-10T18:35:00+08:00</published><updated>2018-09-10T18:35:00+08:00</updated><id>http://localhost:4000/thread-executors-forkjoinpool-actor</id><content type="html" xml:base="http://localhost:4000/thread-executors-forkjoinpool-actor.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
