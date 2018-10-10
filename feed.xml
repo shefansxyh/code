@@ -1,4 +1,60 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-09T16:57:13+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">Java I/O multiplexing</title><link href="http://localhost:4000/java-io-multiplexing.html" rel="alternate" type="text/html" title="Java I/O multiplexing" /><published>2018-10-09T16:56:00+08:00</published><updated>2018-10-09T16:56:00+08:00</updated><id>http://localhost:4000/java-io-multiplexing</id><content type="html" xml:base="http://localhost:4000/java-io-multiplexing.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;package com.xieyonghui.art;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-10T17:46:40+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">Spring aop annotation</title><link href="http://localhost:4000/spring-aop-example.html" rel="alternate" type="text/html" title="Spring aop annotation" /><published>2018-10-10T17:44:00+08:00</published><updated>2018-10-10T17:44:00+08:00</updated><id>http://localhost:4000/spring-aop-example</id><content type="html" xml:base="http://localhost:4000/spring-aop-example.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;
+package com.xieyonghui.art;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogExecutionTime {
+
+}
+
+package com.xieyonghui.art;
+
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
+
+@Aspect
+@Component
+public class ExampleAspect {
+
+  // advice
+  @Around(&quot;@annotation(LogExecutionTime)&quot;)
+  public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+    long start = System.currentTimeMillis();
+
+    Object proceed = joinPoint.proceed();
+
+    long executionTime = System.currentTimeMillis() - start;
+
+    System.out.println(joinPoint.getSignature() + &quot; executed in &quot; + executionTime + &quot;ms&quot;);
+    return proceed;
+  }
+
+}
+
+
+package com.xieyonghui.art;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class Ms {
+
+  @LogExecutionTime
+  public void serve() throws InterruptedException {
+    Thread.sleep(2000);
+  }
+
+}
+
+
+&lt;/code&gt;&lt;/pre&gt;</content><author><name></name></author><summary type="html">```Java</summary></entry><entry><title type="html">Java I/O multiplexing</title><link href="http://localhost:4000/java-io-multiplexing.html" rel="alternate" type="text/html" title="Java I/O multiplexing" /><published>2018-10-09T16:56:00+08:00</published><updated>2018-10-09T16:56:00+08:00</updated><id>http://localhost:4000/java-io-multiplexing</id><content type="html" xml:base="http://localhost:4000/java-io-multiplexing.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;package com.xieyonghui.art;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
