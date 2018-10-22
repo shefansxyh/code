@@ -73,15 +73,12 @@ public class HeapSort {
     int l = 2 * i + 1;
     int r = 2 * i + 2;
 
-    // left &gt; root
     if (l &lt; n &amp;&amp; arr[l] &gt; arr[largest])
       largest = l;
 
-    // right &gt; root
     if (r &lt; n &amp;&amp; arr[r] &gt; arr[largest])
       largest = r;
 
-    // if root &lt; ...
     if (largest != i) {
       int swap = arr[i];
       arr[i] = arr[largest];

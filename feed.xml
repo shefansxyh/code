@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-22T21:46:58+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">heap sort</title><link href="http://localhost:4000/heap-sort-java-demo.html" rel="alternate" type="text/html" title="heap sort" /><published>2018-10-22T17:44:00+08:00</published><updated>2018-10-22T17:44:00+08:00</updated><id>http://localhost:4000/heap-sort-java-demo</id><content type="html" xml:base="http://localhost:4000/heap-sort-java-demo.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;package com.xieyonghui.art;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-10-22T21:54:27+08:00</updated><id>http://localhost:4000/</id><title type="html">code example By cs.xieyonghui.com</title><subtitle>code example By cs.xieyonghui.com</subtitle><entry><title type="html">heap sort</title><link href="http://localhost:4000/heap-sort-java-demo.html" rel="alternate" type="text/html" title="heap sort" /><published>2018-10-22T17:44:00+08:00</published><updated>2018-10-22T17:44:00+08:00</updated><id>http://localhost:4000/heap-sort-java-demo</id><content type="html" xml:base="http://localhost:4000/heap-sort-java-demo.html">&lt;pre&gt;&lt;code class=&quot;language-Java&quot;&gt;package com.xieyonghui.art;
 
 public class HeapSort {
 
@@ -26,15 +26,12 @@ public class HeapSort {
     int l = 2 * i + 1;
     int r = 2 * i + 2;
 
-    // left &amp;gt; root
     if (l &amp;lt; n &amp;amp;&amp;amp; arr[l] &amp;gt; arr[largest])
       largest = l;
 
-    // right &amp;gt; root
     if (r &amp;lt; n &amp;amp;&amp;amp; arr[r] &amp;gt; arr[largest])
       largest = r;
 
-    // if root &amp;lt; ...
     if (largest != i) {
       int swap = arr[i];
       arr[i] = arr[largest];
